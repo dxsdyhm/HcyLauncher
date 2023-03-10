@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="defalt_padings">16dp</dimen>
-    <dimen name="defalt_cornes">16dp</dimen>
+    <dimen name="defalt_margin">24dp</dimen>
+    <dimen name="defalt_cornes">12dp</dimen>
+    <dimen name="status_h">100dp</dimen>
+    <dimen name="status_icon_h">40dp</dimen>
 </resources>
