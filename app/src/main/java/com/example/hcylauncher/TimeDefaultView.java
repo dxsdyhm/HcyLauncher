@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import com.blankj.utilcode.util.TimeUtils;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -33,18 +34,20 @@ public class TimeDefaultView extends LinearLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.time_view_default, this, true);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         initUI();
     }
 
     private void initUI() {
         txTime=findViewById(R.id.tx_time);
         txDate=findViewById(R.id.tx_date);
-        txDate.setText(TimeUtils.getNowString());
 
-        Date currentTime = new Date();
-        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.AM_PM_FIELD, Locale.getDefault());
-        String formattedTime = dateFormat.format(currentTime);
-        Log.e("dxsTest","formattedTime:"+formattedTime);
+        txTime.setText(TimeUtils.getNowString(DateFormat.getTimeInstance(DateFormat.SHORT,Locale.getDefault())));
+        txDate.setText(TimeUtils.getNowString(new SimpleDateFormat("yyyy-MM-dd\nEEEE")));
     }
 
     public void UpdateTime(){
