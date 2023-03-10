@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="defalt_padings">16dp</dimen>
+    <dimen name="defalt_cornes">16dp</dimen>
+</resources>
