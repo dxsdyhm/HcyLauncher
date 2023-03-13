@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/defalt_padings"
     tools:context=".MainActivity">
 
     <com.example.hcylauncher.view.StatusBarView
@@ -104,14 +105,16 @@
 
     </com.example.hcylauncher.view.ItemMainView>
 
-    <RelativeLayout
-        android:id="@+id/rl_temp"
+    <com.example.hcylauncher.view.CustomerAppRecyView
+        android:id="@+id/rl_apps"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="140dp">
+        app:layout_constraintLeft_toLeftOf="@id/item1"
+        android:paddingVertical="10dp"
+        android:clipChildren="false"
+        app:layout_constraintTop_toBottomOf="@id/item1"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp">
 
-    </RelativeLayout>
+    </com.example.hcylauncher.view.CustomerAppRecyView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

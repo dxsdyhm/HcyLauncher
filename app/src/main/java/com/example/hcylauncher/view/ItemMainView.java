@@ -13,19 +13,12 @@ import androidx.core.view.ViewCompat;
 
 import com.example.hcylauncher.R;
 
-public class ItemMainView extends RelativeLayout {
+public class ItemMainView extends ScalRelativelayout {
     private ImageView icon;
     private TextView txName;
-    public ItemMainView(Context context) {
-        this(context,null);
-    }
 
     public ItemMainView(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
-    }
-
-    public ItemMainView(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr,0);
+        this(context, attrs,0,0);
     }
 
     public ItemMainView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
