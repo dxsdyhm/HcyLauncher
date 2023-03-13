@@ -1,4 +1,4 @@
-package com.example.hcylauncher;
+package com.example.hcylauncher.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.TimeUtils;
+import com.example.hcylauncher.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

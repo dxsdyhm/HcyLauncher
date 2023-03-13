@@ -1,4 +1,4 @@
-package com.example.hcylauncher;
+package com.example.hcylauncher.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+
+import com.example.hcylauncher.R;
 
 public class StatusBarView extends LinearLayout {
     public StatusBarView(Context context) {

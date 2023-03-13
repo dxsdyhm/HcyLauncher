@@ -1,4 +1,4 @@
-package com.example.hcylauncher;
+package com.example.hcylauncher.view;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
+
+import com.example.hcylauncher.R;
 
 public class ItemMainView extends RelativeLayout {
     private ImageView icon;
