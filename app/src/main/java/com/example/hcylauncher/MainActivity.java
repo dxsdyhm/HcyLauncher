@@ -9,10 +9,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.example.hcylauncher.adapter.CustomerItemAdapter;
 import com.example.hcylauncher.adapter.HorizontalSpaceItemDecoration;
 import com.example.hcylauncher.base.BaseActicity;
 import com.example.hcylauncher.entry.AppItem;
+import com.example.hcylauncher.utils.AppLayoutUtils;
 import com.example.hcylauncher.view.CustomerAppRecyView;
 
 import java.util.ArrayList;
@@ -41,28 +43,12 @@ public class MainActivity extends BaseActicity {
     }
 
     private void fakeData() {
-        List<AppItem> items=new ArrayList<>();
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
-        items.add(new AppItem());
+        List<AppItem> items= AppLayoutUtils.getAppsDefault();
+        addFootBoot(items);
         adapter.UpdateData(items);
+    }
+
+    private void addFootBoot(List<AppItem> items){
+        items.add(new AppItem(AppUtils.getAppPackageName()+"|"+CustomAppsActivity.class.getName(),AppItem.TYPE_ADD));
     }
 }
