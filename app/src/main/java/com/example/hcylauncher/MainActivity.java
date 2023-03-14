@@ -34,7 +34,7 @@ public class MainActivity extends BaseActicity {
         appRecyView=findViewById(R.id.rl_apps);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         appRecyView.setLayoutManager(layoutManager);
-        appRecyView.addItemDecoration(new HorizontalSpaceItemDecoration(16));
+        appRecyView.addItemDecoration(new HorizontalSpaceItemDecoration(10));
         appRecyView.setAdapter(adapter);
 
         fakeData();

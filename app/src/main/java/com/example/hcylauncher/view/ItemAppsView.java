@@ -20,4 +20,10 @@ public class ItemAppsView extends ScalRelativelayout{
     public ItemAppsView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int w=Math.min(widthMeasureSpec,heightMeasureSpec);
+        super.onMeasure(w, w);
+    }
 }

@@ -15,10 +15,15 @@ public class HorizontalSpaceItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
+        if (parent.getChildAdapterPosition(view) == 0) {
+            outRect.left = mHorizontalSpaceHeight;
+        }
 
         // 对于每个项目，除了最后一个，都添加间距。
         if (parent.getChildAdapterPosition(view) != parent.getAdapter().getItemCount() - 1) {
             outRect.right = mHorizontalSpaceHeight;
+        }else {
+            outRect.right = 260;
         }
     }
 }

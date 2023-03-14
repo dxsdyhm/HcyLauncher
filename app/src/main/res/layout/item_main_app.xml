@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.hcylauncher.view.ItemAppsView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="60dp"
+    android:layout_width="wrap_content"
     android:background="@drawable/bg_main_view"
     android:padding="@dimen/defalt_padings"
     android:focusable="true"
-    android:layout_margin="8dp"
-    android:layout_height="match_parent">
+    android:layout_margin="4dp"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/img_app"
