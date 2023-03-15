@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -19,26 +20,17 @@ import com.example.hcylauncher.view.TimeDefaultView;
  * 2.时间更新
  */
 public class TitleDefaultActivity extends BaseActicity{
+    private static String TAG="TitleDefaultActivity";
 
     private TitleBroadReceviver receviver=new TitleBroadReceviver();
-    private StatusBarView statusBarView;
-    private TimeDefaultView timeDefaultView;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initBaseUI();
-    }
-
-    private void initBaseUI() {
-        statusBarView=findViewById(R.id.ststus);
-        timeDefaultView=findViewById(R.id.time);
-    }
+    public StatusBarView statusBarView;
+    public TimeDefaultView timeDefaultView;
 
     @Override
     protected void onResume() {
         super.onResume();
         registBroadCast();
+        updateDate();
     }
 
     @Override
@@ -60,13 +52,24 @@ public class TitleDefaultActivity extends BaseActicity{
     }
 
     private class TitleBroadReceviver extends BroadcastReceiver{
-
         @Override
         public void onReceive(Context context, Intent intent) {
             String action=intent.getAction();
-            if(Intent.ACTION_TIME_TICK.equals(action)){
-
+            Log.e(TAG,"action:"+action);
+            if(Intent.ACTION_TIME_TICK.equals(action)||Intent.ACTION_TIME_CHANGED.equals(action)){
+                updateDate();
             }
+        }
+    }
+
+    /**
+     * 更新状态栏时间
+     */
+    public void updateDate(){
+        if(timeDefaultView!=null){
+            timeDefaultView.UpdateTime();
+        }else {
+            Log.e(TAG,"timeDefaultView is null");
         }
     }
 }

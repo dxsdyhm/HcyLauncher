@@ -47,6 +47,8 @@ public class MainActivity extends TitleDefaultActivity {
     }
 
     private void initUi() {
+        statusBarView=findViewById(R.id.ststus);
+        timeDefaultView=findViewById(R.id.time);
         appRecyView=findViewById(R.id.rl_apps);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         appRecyView.setLayoutManager(layoutManager);

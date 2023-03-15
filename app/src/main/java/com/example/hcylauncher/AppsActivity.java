@@ -30,6 +30,8 @@ public class AppsActivity extends TitleDefaultActivity {
     }
 
     private void initUi() {
+        statusBarView=findViewById(R.id.ststus);
+        timeDefaultView=findViewById(R.id.time);
         appRecyView = findViewById(R.id.rl_custom);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 5, LinearLayoutManager.VERTICAL, false);
         appRecyView.setLayoutManager(layoutManager);
