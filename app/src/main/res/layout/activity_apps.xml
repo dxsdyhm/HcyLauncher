@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_h">
+
+        <com.example.hcylauncher.view.StatusBarView
+            android:id="@+id/ststus"
+            android:layout_width="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_height="match_parent">
+
+        </com.example.hcylauncher.view.StatusBarView>
+
+        <com.example.hcylauncher.view.TimeDefaultView
+            android:id="@+id/time"
+            android:layout_width="300dp"
+            android:layout_alignParentEnd="true"
+            android:layout_height="match_parent">
+
+        </com.example.hcylauncher.view.TimeDefaultView>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rl_custom"
+        android:layout_marginHorizontal="100dp"
+        app:layout_constraintTop_toBottomOf="@+id/ststus"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

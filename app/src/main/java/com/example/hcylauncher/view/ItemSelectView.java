@@ -41,7 +41,7 @@ public class ItemSelectView extends RelativeLayout {
             return;
         }
         if(txName!=null){
-            txName.setText(item.getPakcgename());
+            txName.setText(item.getAppInfo().getName());
         }
         if(icon!=null){
             icon.setImageDrawable(item.getAppInfo().getIcon());

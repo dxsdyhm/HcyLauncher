@@ -29,7 +29,7 @@ public class CustomerItemAdapter extends RecyclerView.Adapter<CustomerItemAdapte
     public void onBindViewHolder(@NonNull CustomerItemAdapter.ItemViewHolder holder, int position) {
         AppItem appItem=appItems.get(position);
         if(appItem.getType()==AppItem.TYPE_APPS){
-            holder.icon.setImageDrawable(appItem.getAppInfo().getIcon());
+            holder.icon.setImageResource(R.drawable.apps);
         }else if(appItem.getType()==AppItem.TYPE_ADD){
             holder.icon.setImageResource(R.drawable.baseline_add_24);
         }else {

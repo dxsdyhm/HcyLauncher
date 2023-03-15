@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.webkit.WebView;
 
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.example.hcylauncher.adapter.CustomerItemAdapter;
 import com.example.hcylauncher.adapter.HorizontalSpaceItemDecoration;
 import com.example.hcylauncher.base.BaseActicity;
@@ -49,6 +51,7 @@ public class MainActivity extends BaseActicity {
     }
 
     private void addFootBoot(List<AppItem> items){
+        items.add(0,new AppItem(AppUtils.getAppPackageName()+"|"+AppsActivity.class.getName(),AppItem.TYPE_APPS));
         items.add(new AppItem(AppUtils.getAppPackageName()+"|"+CustomAppsActivity.class.getName(),AppItem.TYPE_ADD));
     }
 }
