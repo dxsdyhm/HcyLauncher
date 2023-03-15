@@ -18,26 +18,7 @@ import com.blankj.utilcode.util.PermissionUtils;
 public class BaseActicity extends AppCompatActivity {
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        setBackGround();
-    }
-
-    private void setBackGround() {
-        WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-        PermissionUtils.permission(PermissionConstants.STORAGE)
-                .callback(new PermissionUtils.SimpleCallback() {
-
-                    @Override
-                    public void onGranted() {
-                        @SuppressLint("MissingPermission") Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-                        getWindow().setBackgroundDrawable(wallpaperDrawable);
-                    }
-
-                    @Override
-                    public void onDenied() {
-                        Log.e("dxsTest", "STORAGE onDenied");
-                    }
-                }).request();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 }

@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.example.hcylauncher.adapter.AppsSelectAdapter;
 import com.example.hcylauncher.adapter.SpaceItemDecoration;
+import com.example.hcylauncher.base.TitleDefaultActivity;
 import com.example.hcylauncher.entry.AppItem;
 import com.example.hcylauncher.utils.AppInstallUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppsActivity extends AppCompatActivity {
+public class AppsActivity extends TitleDefaultActivity {
     private RecyclerView appRecyView;
     private AppsSelectAdapter adapter = new AppsSelectAdapter(false);
     @Override
