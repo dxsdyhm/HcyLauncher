@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/status_margin"
         android:layout_weight="1"
+        android:visibility="gone"
         android:src="@drawable/ethernet"></ImageView>
 
     <ImageView
@@ -18,6 +19,7 @@
         android:layout_marginHorizontal="@dimen/status_margin"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:visibility="gone"
         android:src="@drawable/baseline_wifi_24"></ImageView>
 
     <ImageView
@@ -26,6 +28,7 @@
         android:layout_marginHorizontal="@dimen/status_margin"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:visibility="gone"
         android:src="@drawable/baseline_bluetooth_24"></ImageView>
 
     <ImageView
@@ -34,6 +37,7 @@
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/status_margin"
         android:layout_weight="1"
+        android:visibility="gone"
         android:src="@drawable/baseline_usb_24"></ImageView>
 
     <ImageView
@@ -42,6 +46,7 @@
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/status_margin"
         android:layout_weight="1"
+        android:visibility="gone"
         android:src="@drawable/baseline_sd_card_24"></ImageView>
 
 </LinearLayout>

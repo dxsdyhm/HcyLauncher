@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.IntentUtils;
 import com.example.hcylauncher.R;
 import com.example.hcylauncher.entry.AppItem;
@@ -52,6 +53,7 @@ public class AppsSelectAdapter extends RecyclerView.Adapter<AppsSelectAdapter.It
                 return false;
             }
         });
+        holder.mainView.setOnClickListener(new AppClickListner(item));
     }
 
     @Override

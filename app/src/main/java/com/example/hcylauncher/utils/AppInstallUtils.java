@@ -6,11 +6,30 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class AppInstallUtils {
-    public static List<ResolveInfo> getAllApps(Context context) {
+    private static AppInstallUtils instance;
+    private List<ResolveInfo> apps;
+    private AppInstallUtils(Context context) {
+        apps = getAllApps(context);
+    }
+
+    // TODO: 2023/3/15 内存泄漏风险
+    public static AppInstallUtils getInstance(Context context) {
+        if (instance == null) {
+            instance = new AppInstallUtils(context);
+        }
+        return instance;
+    }
+
+    public List<ResolveInfo> getAllApps(){
+        return apps;
+    }
+
+    private List<ResolveInfo> getAllApps(Context context) {
         PackageManager packageManager = context.getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -35,7 +54,7 @@ public class AppInstallUtils {
         return apps;
     }
 
-    public static List<ResolveInfo> getAllTVApps(Context context) {
+    private List<ResolveInfo> getAllTVApps(Context context) {
         PackageManager packageManager = context.getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LEANBACK_LAUNCHER);

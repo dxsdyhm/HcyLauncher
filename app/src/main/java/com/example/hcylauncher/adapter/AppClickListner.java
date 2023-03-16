@@ -8,6 +8,7 @@ import android.view.View;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.IntentUtils;
+import com.example.hcylauncher.CustomAppsActivity;
 import com.example.hcylauncher.entry.AppItem;
 
 public class AppClickListner implements View.OnClickListener {
@@ -23,7 +24,11 @@ public class AppClickListner implements View.OnClickListener {
         if(appItem!=null){
             if(TextUtils.isEmpty(appItem.getPage())){
                 //直接启动
-                AppUtils.launchApp(appItem.getPakcgename());
+                if(TextUtils.isEmpty(appItem.getPakcgename())){
+                    ActivityUtils.startActivity(CustomAppsActivity.class);
+                }else {
+                    AppUtils.launchApp(appItem.getPakcgename());
+                }
             }else {
                 //启动指定页面
 //                Intent intent=IntentUtils.getLaunchAppIntent(appItem.getPakcgename());
@@ -33,6 +38,8 @@ public class AppClickListner implements View.OnClickListener {
             }
         }else {
             Log.e(TAG,"click null obj");
+            ActivityUtils.startActivity(CustomAppsActivity.class);
+            //去选择一个
         }
     }
 }

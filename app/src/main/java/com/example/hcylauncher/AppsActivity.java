@@ -48,7 +48,7 @@ public class AppsActivity extends TitleDefaultActivity {
 
     private void fackData() {
         List<AppItem> appItems=new ArrayList<>();
-        List<ResolveInfo> infoList = AppInstallUtils.getAllApps(this);
+        List<ResolveInfo> infoList = AppInstallUtils.getInstance(this.getApplicationContext()).getAllApps();
         for (ResolveInfo info : infoList) {
             AppItem item=new AppItem(info.activityInfo.packageName,AppItem.TYPE_DEFAULT);
             appItems.add(item);

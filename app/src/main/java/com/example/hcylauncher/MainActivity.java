@@ -17,21 +17,36 @@ import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PermissionUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.example.hcylauncher.adapter.CustomerItemAdapter;
 import com.example.hcylauncher.adapter.HorizontalSpaceItemDecoration;
 import com.example.hcylauncher.base.BaseActicity;
 import com.example.hcylauncher.base.TitleDefaultActivity;
+import com.example.hcylauncher.comm.SPkey;
 import com.example.hcylauncher.entry.AppItem;
+import com.example.hcylauncher.entry.DefaultLayApps;
 import com.example.hcylauncher.utils.AppLayoutUtils;
 import com.example.hcylauncher.view.CustomerAppRecyView;
+import com.example.hcylauncher.view.ItemMainView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 存储结构
+ * key群 6个位置  value 是包名|启动页
+ * key 快捷栏标志  value 一长串符合格式的包名
+ *
+ * 优先读取自己存储的数据，如果没有数据才去读取系统文件
+ * 系统文件读过一次后不再读取
+ */
 public class MainActivity extends TitleDefaultActivity {
 
     private CustomerAppRecyView appRecyView;
     private CustomerItemAdapter adapter=new CustomerItemAdapter();
+
+    private ItemMainView item1,item2,item3,item4,item5,item6;
+    private DefaultLayApps apps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,23 +58,44 @@ public class MainActivity extends TitleDefaultActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        apps=AppLayoutUtils.loadData();
         setBackGround();
+        loadMainApps();
+        loadCustomerApps();
     }
 
     private void initUi() {
         statusBarView=findViewById(R.id.ststus);
         timeDefaultView=findViewById(R.id.time);
         appRecyView=findViewById(R.id.rl_apps);
+
+        item1=findViewById(R.id.item1);
+        item2=findViewById(R.id.item2);
+        item3=findViewById(R.id.item3);
+        item4=findViewById(R.id.item4);
+        item5=findViewById(R.id.item5);
+        item6=findViewById(R.id.item6);
+
         LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         appRecyView.setLayoutManager(layoutManager);
         appRecyView.addItemDecoration(new HorizontalSpaceItemDecoration(10));
         appRecyView.setAdapter(adapter);
-
-        fakeData();
     }
 
-    private void fakeData() {
-        List<AppItem> items= AppLayoutUtils.getAppsDefault();
+    private void loadMainApps(){
+        item1.UpdateUi(new AppItem(apps.getApp1()));
+        item2.UpdateUi(new AppItem(apps.getApp2()));
+        item3.UpdateUi(new AppItem(apps.getApp3()));
+        item4.UpdateUi(new AppItem(apps.getApp4()));
+        item5.UpdateUi(new AppItem(apps.getApp5()));
+        item6.UpdateUi(new AppItem(apps.getApp6()));
+    }
+
+    private void loadCustomerApps() {
+        List<AppItem> items= new ArrayList<>();
+        for(String pack:apps.getApps()){
+            items.add(new AppItem(pack));
+        }
         addFootBoot(items);
         adapter.UpdateData(items);
     }

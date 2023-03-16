@@ -5,7 +5,10 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 
 import com.example.hcylauncher.R;
+import com.example.hcylauncher.adapter.AppClickListner;
 import com.example.hcylauncher.entry.AppItem;
 
 public class ItemMainView extends ScalRelativelayout {
@@ -30,8 +34,10 @@ public class ItemMainView extends ScalRelativelayout {
         inflater.inflate(R.layout.item_main_view, this, true);
         icon = findViewById(R.id.img_icon);
         txName = findViewById(R.id.tx_appname);
-
+        setClickListner(null);
     }
+
+
 
     @Override
     protected void onFocusChanged(boolean gainFocus, int direction, @Nullable Rect previouslyFocusedRect) {
@@ -51,14 +57,48 @@ public class ItemMainView extends ScalRelativelayout {
     }
 
     public void UpdateUi(AppItem item){
+        setClickListner(item);
         if(item==null){
             return;
         }
         if(txName!=null){
             txName.setText(item.getPakcgename());
+            txName.setVisibility(VISIBLE);
+        }else {
+            txName.setVisibility(GONE);
         }
         if(icon!=null){
-            icon.setImageDrawable(item.getAppInfo().getIcon());
+            if(item.getAppInfo()!=null){
+                icon.setImageDrawable(item.getAppInfo().getIcon());
+            }else {
+                icon.setImageResource(R.drawable.baseline_add_circle_outline_24);
+            }
         }
+    }
+
+    private void setClickListner(AppItem item){
+        setOnClickListener(new AppClickListner(item));
+        setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                //展示popmenu
+                PopupMenu popupMenu=new PopupMenu(view.getContext(),view);
+                popupMenu.getMenuInflater().inflate(R.menu.remove_replay,popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()){
+                            case R.id.remove:
+                                break;
+                            case R.id.replace:
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
+                return false;
+            }
+        });
     }
 }
