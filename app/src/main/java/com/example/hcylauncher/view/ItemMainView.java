@@ -91,7 +91,7 @@ public class ItemMainView extends ScalRelativelayout {
                         switch (menuItem.getItemId()){
                             case R.id.remove:
                                 AppLayoutUtils.loadData().replaceItem(item.getIndex(),"");
-                                //item=new AppItem("",item.getType(),item.getIndex());
+                                UpdateUi(new AppItem("",item.getType(),item.getIndex()));
                                 break;
                             case R.id.replace:
                                 AppClickListner.toReplace(item,view);
