@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageView;
 
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.AppUtils;
@@ -53,6 +54,8 @@ public class MainActivity extends TitleDefaultActivity {
     private ItemMainView item1,item2,item3,item4,item5,item6;
     private DefaultLayApps apps;
 
+    private ImageView ivClean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +84,8 @@ public class MainActivity extends TitleDefaultActivity {
         item5=findViewById(R.id.item5);
         item6=findViewById(R.id.item6);
 
+        ivClean=findViewById(R.id.iv_clean);
+
         LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         appRecyView.setLayoutManager(layoutManager);
         appRecyView.addItemDecoration(new HorizontalSpaceItemDecoration(10));
@@ -94,6 +99,17 @@ public class MainActivity extends TitleDefaultActivity {
         item4.UpdateUi(new AppItem(apps.getApp4(),AppItem.TYPE_DEFAULT,4));
         item5.UpdateUi(new AppItem(apps.getApp5(),AppItem.TYPE_DEFAULT,5));
         item6.UpdateUi(new AppItem(apps.getApp6(),AppItem.TYPE_DEFAULT,6));
+
+        if(ivClean!=null){
+            boolean hasCleanApp=AppUtils.isAppInstalled(apps.getClean());
+            ivClean.setVisibility(hasCleanApp?View.VISIBLE:View.GONE);
+            ivClean.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppUtils.launchApp(apps.getClean());
+                }
+            });
+        }
     }
 
     private void loadCustomerApps() {

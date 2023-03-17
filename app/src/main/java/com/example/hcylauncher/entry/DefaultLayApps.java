@@ -20,6 +20,7 @@ public class DefaultLayApps {
     private String app4="";
     private String app5="";
     private String app6="";
+    private String clean="";
     private String[] apps;
 
     public String getApp1() {
@@ -48,6 +49,14 @@ public class DefaultLayApps {
 
     public String getApp4() {
         return app4;
+    }
+
+    public String getClean() {
+        return clean;
+    }
+
+    public void setClean(String clean) {
+        this.clean = clean;
     }
 
     public void setApp4(String app4) {

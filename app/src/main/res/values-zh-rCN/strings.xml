@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HcyLauncher</string>
+    <string name="replace">替换</string>
+    <string name="remove">删除</string>
+</resources>

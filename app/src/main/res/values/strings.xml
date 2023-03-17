@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HcyLauncher</string>
+    <string name="replace">Replace</string>
+    <string name="remove">Remove</string>
 </resources>
