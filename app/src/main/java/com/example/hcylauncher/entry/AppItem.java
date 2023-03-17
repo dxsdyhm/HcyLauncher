@@ -15,6 +15,8 @@ public class AppItem {
     private String pakcgename;
     private String page;
     private int type = TYPE_DEFAULT;
+    //主界面才有位置
+    private int index;
 
     public int getType() {
         return type;
@@ -23,6 +25,16 @@ public class AppItem {
     public AppItem(String pakcgename, int type) {
         this(pakcgename);
         this.type = type;
+    }
+
+    public AppItem(String pakcgename, int type,int indexMain) {
+        this(pakcgename);
+        this.type = type;
+        this.index=indexMain;
+    }
+
+    public int getIndex(){
+        return index;
     }
 
     public String getPage() {

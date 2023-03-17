@@ -21,7 +21,7 @@ import java.util.List;
 
 public class AppsActivity extends TitleDefaultActivity {
     private RecyclerView appRecyView;
-    private AppsSelectAdapter adapter = new AppsSelectAdapter(false);
+    private AppsSelectAdapter adapter = new AppsSelectAdapter(CustomAppsActivity.FUNCTION_SHOW);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

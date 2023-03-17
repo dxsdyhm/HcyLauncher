@@ -1,5 +1,18 @@
 package com.example.hcylauncher.entry;
 
+import android.text.TextUtils;
+
+import com.example.hcylauncher.adapter.AppClickListner;
+import com.example.hcylauncher.comm.Constans;
+import com.example.hcylauncher.utils.AppLayoutUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class DefaultLayApps {
     private String app1="";
     private String app2="";
@@ -63,5 +76,64 @@ public class DefaultLayApps {
 
     public void setApps(String[] apps) {
         this.apps = apps;
+    }
+
+    public void addApp(String pks){
+        try {
+            Set<String> allpack=new HashSet<>();
+            //先点的加在前面
+            for (String s:this.apps){
+                allpack.add(s);
+            }
+            allpack.add(pks);
+            String[] temp=new String[allpack.size()];
+            allpack.toArray(temp);
+            this.apps=temp;
+            AppLayoutUtils.saveData(this);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removeApp(String pks){
+        try {
+            Set<String> allpack=new HashSet<>();
+            for (String s:this.apps){
+                allpack.add(s);
+            }
+            allpack.remove(pks);
+            String[] temp=new String[allpack.size()];
+            allpack.toArray(temp);
+            this.apps=temp;
+            AppLayoutUtils.saveData(this);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean hasApp(String pks){
+        if(TextUtils.isEmpty(pks)){
+            return false;
+        }
+        for(String s:apps){
+            if(pks.equals(s)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void replaceItem(int index, String pack){
+        switch (index){
+            case 1: this.app1=pack;break;
+            case 2: this.app2=pack;break;
+            case 3: this.app3=pack;break;
+            case 4: this.app4=pack;break;
+            case 5: this.app5=pack;break;
+            case 6: this.app6=pack;break;
+            default:
+                break;
+        }
+        AppLayoutUtils.saveData(this);
     }
 }

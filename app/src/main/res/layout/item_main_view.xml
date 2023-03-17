@@ -23,6 +23,8 @@
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
         android:focusable="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:focusableInTouchMode="true"
         android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"

@@ -44,6 +44,7 @@ public class AppLayoutUtils {
             }
             defaultLayApps=GsonUtils.fromJson(apps,DefaultLayApps.class);
         } catch (Exception e) {
+            e.printStackTrace();
             Log.e(TAG,"default config is errot :"+apps);
             defaultLayApps=GsonUtils.fromJson(DEFAULT_APPS_EMPTY,DefaultLayApps.class);
         }

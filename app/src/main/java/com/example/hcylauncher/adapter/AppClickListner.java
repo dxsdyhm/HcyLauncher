@@ -1,6 +1,7 @@
 package com.example.hcylauncher.adapter;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.IntentUtils;
 import com.example.hcylauncher.CustomAppsActivity;
+import com.example.hcylauncher.comm.Constans;
 import com.example.hcylauncher.entry.AppItem;
 
 public class AppClickListner implements View.OnClickListener {
@@ -25,21 +27,47 @@ public class AppClickListner implements View.OnClickListener {
             if(TextUtils.isEmpty(appItem.getPage())){
                 //直接启动
                 if(TextUtils.isEmpty(appItem.getPakcgename())){
-                    ActivityUtils.startActivity(CustomAppsActivity.class);
+                    toReplace(view);
                 }else {
                     AppUtils.launchApp(appItem.getPakcgename());
                 }
             }else {
                 //启动指定页面
-//                Intent intent=IntentUtils.getLaunchAppIntent(appItem.getPakcgename());
-//                intent.setClassName(appItem.getPakcgename(),appItem.getPage());
-//                ActivityUtils.startActivity(intent);
-                ActivityUtils.startActivity(appItem.getPakcgename(),appItem.getPage());
+                if(CustomAppsActivity.class.getName().equals(appItem.getPage())){
+                    toAdd(view);
+                }else {
+                    ActivityUtils.startActivity(appItem.getPakcgename(),appItem.getPage());
+                }
             }
         }else {
             Log.e(TAG,"click null obj");
-            ActivityUtils.startActivity(CustomAppsActivity.class);
-            //去选择一个
+            toReplace(view);
         }
+    }
+
+    private void toReplace(View view){
+        Log.e(TAG,"toReplace");
+        Intent intent=new Intent();
+        intent.setClassName(AppUtils.getAppPackageName(),CustomAppsActivity.class.getName());
+        intent.putExtra(Constans.BUND_ACTIVITY_FUN,CustomAppsActivity.FUNCTION_REPLACE);
+        intent.putExtra(Constans.BUND_REPLACE_INDEX,appItem.getIndex());
+        view.getContext().startActivity(intent);
+    }
+
+    public static void toReplace(AppItem appItem,View view){
+        Log.e(TAG,"toReplace");
+        Intent intent=new Intent();
+        intent.setClassName(AppUtils.getAppPackageName(),CustomAppsActivity.class.getName());
+        intent.putExtra(Constans.BUND_ACTIVITY_FUN,CustomAppsActivity.FUNCTION_REPLACE);
+        intent.putExtra(Constans.BUND_REPLACE_INDEX,appItem.getIndex());
+        view.getContext().startActivity(intent);
+    }
+
+    private void toAdd(View view){
+        Log.e(TAG,"toAdd");
+        Intent intent=new Intent();
+        intent.setClassName(AppUtils.getAppPackageName(),CustomAppsActivity.class.getName());
+        intent.putExtra(Constans.BUND_ACTIVITY_FUN,CustomAppsActivity.FUNCTION_SELECT);
+        view.getContext().startActivity(intent);
     }
 }

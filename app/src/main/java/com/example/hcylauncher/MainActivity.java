@@ -6,18 +6,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebView;
 
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.PathUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ThreadUtils;
 import com.example.hcylauncher.adapter.CustomerItemAdapter;
 import com.example.hcylauncher.adapter.HorizontalSpaceItemDecoration;
 import com.example.hcylauncher.base.BaseActicity;
@@ -83,12 +88,12 @@ public class MainActivity extends TitleDefaultActivity {
     }
 
     private void loadMainApps(){
-        item1.UpdateUi(new AppItem(apps.getApp1()));
-        item2.UpdateUi(new AppItem(apps.getApp2()));
-        item3.UpdateUi(new AppItem(apps.getApp3()));
-        item4.UpdateUi(new AppItem(apps.getApp4()));
-        item5.UpdateUi(new AppItem(apps.getApp5()));
-        item6.UpdateUi(new AppItem(apps.getApp6()));
+        item1.UpdateUi(new AppItem(apps.getApp1(),AppItem.TYPE_DEFAULT,1));
+        item2.UpdateUi(new AppItem(apps.getApp2(),AppItem.TYPE_DEFAULT,2));
+        item3.UpdateUi(new AppItem(apps.getApp3(),AppItem.TYPE_DEFAULT,3));
+        item4.UpdateUi(new AppItem(apps.getApp4(),AppItem.TYPE_DEFAULT,4));
+        item5.UpdateUi(new AppItem(apps.getApp5(),AppItem.TYPE_DEFAULT,5));
+        item6.UpdateUi(new AppItem(apps.getApp6(),AppItem.TYPE_DEFAULT,6));
     }
 
     private void loadCustomerApps() {

@@ -2,6 +2,7 @@ package com.example.hcylauncher.adapter;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +14,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.IntentUtils;
+import com.example.hcylauncher.CustomAppsActivity;
 import com.example.hcylauncher.R;
 import com.example.hcylauncher.entry.AppItem;
+import com.example.hcylauncher.entry.DefaultLayApps;
+import com.example.hcylauncher.utils.AppLayoutUtils;
 import com.example.hcylauncher.view.ItemSelectView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppsSelectAdapter extends RecyclerView.Adapter<AppsSelectAdapter.ItemViewHolder> {
-    private boolean showSelect;
-    private List<AppItem> appItems=new ArrayList<>();
+    private int function;
+    private List<AppItem> appItems = new ArrayList<>();
+    private OnAppItemSelec onAppItemSelec;
+
+    private DefaultLayApps apps;
+
+    private int indexReplaceMain;
 
     public AppsSelectAdapter() {
     }
 
-    public AppsSelectAdapter(boolean showSelect) {
-        this.showSelect = showSelect;
+    public AppsSelectAdapter(int function) {
+        this.function = function;
+        if(function==CustomAppsActivity.FUNCTION_REPLACE||function==CustomAppsActivity.FUNCTION_SELECT){
+            apps= AppLayoutUtils.loadData();
+        }
     }
 
     @NonNull
@@ -41,19 +53,40 @@ public class AppsSelectAdapter extends RecyclerView.Adapter<AppsSelectAdapter.It
 
     @Override
     public void onBindViewHolder(@NonNull AppsSelectAdapter.ItemViewHolder holder, int position) {
-        AppItem item=appItems.get(position);
+        AppItem item = appItems.get(position);
         holder.mainView.UpdateUi(item);
-        holder.check.setVisibility(showSelect?View.VISIBLE:View.GONE);
-        holder.mainView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Uri uri = Uri.fromParts("package", item.getPakcgename(), null);
-                Intent intent = new Intent(Intent.ACTION_DELETE, uri);
-                ActivityUtils.startActivity(intent);
-                return false;
-            }
-        });
-        holder.mainView.setOnClickListener(new AppClickListner(item));
+        Log.e("hcylauncher","function:"+function+"  onAppItemSelec:"+onAppItemSelec+"  apps:"+apps);
+        if (function == CustomAppsActivity.FUNCTION_SHOW) {
+            holder.check.setVisibility(View.GONE);
+            holder.mainView.setOnLongClickListener(new AppDeleteLongClick(item));
+        }else if(function == CustomAppsActivity.FUNCTION_REPLACE&&apps!=null){
+            holder.check.setVisibility(View.GONE);
+            holder.mainView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    apps.replaceItem(indexReplaceMain,item.getPakcgename());
+                    ActivityUtils.finishActivity(CustomAppsActivity.class);
+                }
+            });
+        }else if(function == CustomAppsActivity.FUNCTION_SELECT){
+            //要展示选中和非选中状态
+            boolean isCheck=apps.hasApp(item.getPakcgename());
+            holder.check.setVisibility(isCheck?View.VISIBLE:View.GONE);
+            holder.mainView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(apps.hasApp(item.getPakcgename())){
+                        apps.removeApp(item.getPakcgename());
+                    }else {
+                        apps.addApp(item.getPakcgename());
+                    }
+                    notifyItemChanged(holder.getAdapterPosition());
+                }
+            });
+        }else {
+            //直接跳转
+            holder.mainView.setOnClickListener(new AppClickListner(item));
+        }
     }
 
     @Override
@@ -61,20 +94,34 @@ public class AppsSelectAdapter extends RecyclerView.Adapter<AppsSelectAdapter.It
         return appItems.size();
     }
 
-    public void UpdateData(List<AppItem> items){
-        this.appItems=items;
+    public void UpdateData(List<AppItem> items) {
+        this.appItems = items;
         notifyDataSetChanged();
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder{
+    public void setOnAppItemSelect(OnAppItemSelec onAppItemSelec){
+        this.onAppItemSelec=onAppItemSelec;
+    }
+
+    public void setReplaceIndex(int index){
+        this.indexReplaceMain=index;
+    }
+
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         private View itemView;
         public ImageView check;
         public ItemSelectView mainView;
+
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.itemView=itemView;
-            check=itemView.findViewById(R.id.img_select);
-            mainView=itemView.findViewById(R.id.item_app);
+            this.itemView = itemView;
+            check = itemView.findViewById(R.id.img_select);
+            mainView = itemView.findViewById(R.id.item_app);
         }
+    }
+
+    @Deprecated
+    public interface OnAppItemSelec{
+        void onAppItemSelect(AppItem item,int position);
     }
 }

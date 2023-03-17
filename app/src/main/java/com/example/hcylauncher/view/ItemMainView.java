@@ -18,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import com.example.hcylauncher.R;
 import com.example.hcylauncher.adapter.AppClickListner;
 import com.example.hcylauncher.entry.AppItem;
+import com.example.hcylauncher.utils.AppLayoutUtils;
 
 public class ItemMainView extends ScalRelativelayout {
     private ImageView icon;
@@ -36,8 +37,6 @@ public class ItemMainView extends ScalRelativelayout {
         txName = findViewById(R.id.tx_appname);
         setClickListner(null);
     }
-
-
 
     @Override
     protected void onFocusChanged(boolean gainFocus, int direction, @Nullable Rect previouslyFocusedRect) {
@@ -62,10 +61,12 @@ public class ItemMainView extends ScalRelativelayout {
             return;
         }
         if(txName!=null){
-            txName.setText(item.getPakcgename());
-            txName.setVisibility(VISIBLE);
-        }else {
-            txName.setVisibility(GONE);
+            if(item.getAppInfo()!=null){
+                txName.setText(item.getAppInfo().getName());
+                txName.setVisibility(VISIBLE);
+            }else {
+                txName.setVisibility(GONE);
+            }
         }
         if(icon!=null){
             if(item.getAppInfo()!=null){
@@ -89,8 +90,11 @@ public class ItemMainView extends ScalRelativelayout {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
                             case R.id.remove:
+                                AppLayoutUtils.loadData().replaceItem(item.getIndex(),"");
+                                //item=new AppItem("",item.getType(),item.getIndex());
                                 break;
                             case R.id.replace:
+                                AppClickListner.toReplace(item,view);
                                 break;
                         }
                         return true;
