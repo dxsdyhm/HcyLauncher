@@ -54,12 +54,18 @@ public class AppsSelectAdapter extends RecyclerView.Adapter<AppsSelectAdapter.It
     @Override
     public void onBindViewHolder(@NonNull AppsSelectAdapter.ItemViewHolder holder, int position) {
         AppItem item = appItems.get(position);
-        holder.mainView.UpdateUi(item);
-        Log.e("hcylauncher","function:"+function+"  onAppItemSelec:"+onAppItemSelec+"  apps:"+apps);
+        Log.e("dxsTest","item.isLegal():"+item.isLegal()+"  function:"+function);
         if (function == CustomAppsActivity.FUNCTION_SHOW) {
+            if(item.isLegal()){
+                holder.mainView.UpdateUi(item);
+            }else {
+                appItems.remove(item);
+            }
             holder.check.setVisibility(View.GONE);
+            holder.mainView.setOnClickListener(new AppClickListner(item));
             holder.mainView.setOnLongClickListener(new AppDeleteLongClick(item));
         }else if(function == CustomAppsActivity.FUNCTION_REPLACE&&apps!=null){
+            holder.mainView.UpdateUi(item);
             holder.check.setVisibility(View.GONE);
             holder.mainView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,6 +75,7 @@ public class AppsSelectAdapter extends RecyclerView.Adapter<AppsSelectAdapter.It
                 }
             });
         }else if(function == CustomAppsActivity.FUNCTION_SELECT){
+            holder.mainView.UpdateUi(item);
             //要展示选中和非选中状态
             boolean isCheck=apps.hasApp(item.getPakcgename());
             holder.check.setVisibility(isCheck?View.VISIBLE:View.GONE);
@@ -84,6 +91,7 @@ public class AppsSelectAdapter extends RecyclerView.Adapter<AppsSelectAdapter.It
                 }
             });
         }else {
+            holder.mainView.UpdateUi(item);
             //直接跳转
             holder.mainView.setOnClickListener(new AppClickListner(item));
         }

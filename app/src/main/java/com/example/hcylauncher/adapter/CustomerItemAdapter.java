@@ -33,7 +33,11 @@ public class CustomerItemAdapter extends RecyclerView.Adapter<CustomerItemAdapte
         }else if(appItem.getType()==AppItem.TYPE_ADD){
             holder.icon.setImageResource(R.drawable.baseline_add_24);
         }else {
-            holder.icon.setImageDrawable(appItem.getAppInfo().getIcon());
+            if(appItem.isLegal()){
+                holder.icon.setImageDrawable(appItem.getAppInfo().getIcon());
+            }else {
+                appItems.remove(appItem);
+            }
         }
         holder.itemView.setOnClickListener(new AppClickListner(appItem));
     }

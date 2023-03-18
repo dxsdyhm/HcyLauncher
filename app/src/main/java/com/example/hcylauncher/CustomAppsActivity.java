@@ -63,6 +63,7 @@ public class CustomAppsActivity extends AppCompatActivity {
         appRecyView.setLayoutManager(layoutManager);
         int pix = ConvertUtils.dp2px(10);
         appRecyView.addItemDecoration(new SpaceItemDecoration(5, pix, true));
+        appRecyView.setItemAnimator(null);
         appRecyView.setAdapter(adapter);
     }
 

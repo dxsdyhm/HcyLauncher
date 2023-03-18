@@ -9,8 +9,13 @@ import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.example.hcylauncher.entry.DefaultLayApps;
+import com.example.hcylauncher.utils.AppLayoutUtils;
 import com.example.hcylauncher.view.StatusBarView;
 import com.example.hcylauncher.view.TimeDefaultView;
 
@@ -25,6 +30,7 @@ public class TitleDefaultActivity extends BaseActicity{
     private TitleBroadReceviver receviver=new TitleBroadReceviver();
     public StatusBarView statusBarView;
     public TimeDefaultView timeDefaultView;
+    public ImageView ivClean;
 
     @Override
     protected void onResume() {
@@ -32,6 +38,7 @@ public class TitleDefaultActivity extends BaseActicity{
         registBroadCast();
         updateDate();
         diaystuts();
+        checkClean();
     }
 
     @Override
@@ -92,6 +99,20 @@ public class TitleDefaultActivity extends BaseActicity{
             isSD();
             isUSB();
             isBluetooth();
+        }
+    }
+
+    private void checkClean(){
+        if(ivClean!=null){
+            DefaultLayApps apps= AppLayoutUtils.loadData();
+            boolean hasCleanApp= AppUtils.isAppInstalled(apps.getClean());
+            ivClean.setVisibility(hasCleanApp? View.VISIBLE:View.GONE);
+            ivClean.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppUtils.launchApp(apps.getClean());
+                }
+            });
         }
     }
 

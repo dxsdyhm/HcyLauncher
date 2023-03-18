@@ -3,6 +3,7 @@ package com.example.hcylauncher.view;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.hcylauncher.R;
 import com.example.hcylauncher.entry.AppItem;
 
@@ -37,14 +39,20 @@ public class ItemSelectView extends RelativeLayout {
     }
 
     public void UpdateUi(AppItem item){
-        if(item==null){
+        if(item==null||!item.isLegal()){
             return;
         }
-        if(txName!=null){
-            txName.setText(item.getAppInfo().getName());
-        }
-        if(icon!=null){
-            icon.setImageDrawable(item.getAppInfo().getIcon());
+        if(item.getAppInfo()!=null){
+            if(txName!=null){
+                txName.setText(item.getAppInfo().getName());
+            }
+            if(icon!=null){
+                icon.setImageDrawable(item.getAppInfo().getIcon());
+            }
+        }else {
+            if(txName!=null){
+                txName.setText("");
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.IntentUtils;
+import com.example.hcylauncher.AppsActivity;
 import com.example.hcylauncher.CustomAppsActivity;
 import com.example.hcylauncher.comm.Constans;
 import com.example.hcylauncher.entry.AppItem;
@@ -27,31 +28,24 @@ public class AppClickListner implements View.OnClickListener {
             if(TextUtils.isEmpty(appItem.getPage())){
                 //直接启动
                 if(TextUtils.isEmpty(appItem.getPakcgename())){
-                    toReplace(view);
+                    toSelecFuncton(view,CustomAppsActivity.FUNCTION_REPLACE);
                 }else {
                     AppUtils.launchApp(appItem.getPakcgename());
                 }
             }else {
                 //启动指定页面
                 if(CustomAppsActivity.class.getName().equals(appItem.getPage())){
-                    toAdd(view);
-                }else {
+                    toSelecFuncton(view,CustomAppsActivity.FUNCTION_SELECT);
+                } else if (AppsActivity.class.getName().equals(appItem.getPage())) {
+                    toSelecFuncton(view,CustomAppsActivity.FUNCTION_SHOW);
+                } else {
                     ActivityUtils.startActivity(appItem.getPakcgename(),appItem.getPage());
                 }
             }
         }else {
             Log.e(TAG,"click null obj");
-            toReplace(view);
+            toSelecFuncton(view,CustomAppsActivity.FUNCTION_REPLACE);
         }
-    }
-
-    private void toReplace(View view){
-        Log.e(TAG,"toReplace");
-        Intent intent=new Intent();
-        intent.setClassName(AppUtils.getAppPackageName(),CustomAppsActivity.class.getName());
-        intent.putExtra(Constans.BUND_ACTIVITY_FUN,CustomAppsActivity.FUNCTION_REPLACE);
-        intent.putExtra(Constans.BUND_REPLACE_INDEX,appItem.getIndex());
-        view.getContext().startActivity(intent);
     }
 
     public static void toReplace(AppItem appItem,View view){
@@ -63,11 +57,17 @@ public class AppClickListner implements View.OnClickListener {
         view.getContext().startActivity(intent);
     }
 
-    private void toAdd(View view){
-        Log.e(TAG,"toAdd");
+    private void toSelecFuncton(View view,int function){
         Intent intent=new Intent();
-        intent.setClassName(AppUtils.getAppPackageName(),CustomAppsActivity.class.getName());
-        intent.putExtra(Constans.BUND_ACTIVITY_FUN,CustomAppsActivity.FUNCTION_SELECT);
+        intent.putExtra(Constans.BUND_ACTIVITY_FUN,function);
+        if(function==CustomAppsActivity.FUNCTION_SELECT){
+            intent.setClassName(AppUtils.getAppPackageName(),CustomAppsActivity.class.getName());
+        } else if (function==CustomAppsActivity.FUNCTION_REPLACE) {
+            intent.putExtra(Constans.BUND_REPLACE_INDEX,appItem.getIndex());
+            intent.setClassName(AppUtils.getAppPackageName(),CustomAppsActivity.class.getName());
+        } else {
+            intent.setClassName(AppUtils.getAppPackageName(),AppsActivity.class.getName());
+        }
         view.getContext().startActivity(intent);
     }
 }
