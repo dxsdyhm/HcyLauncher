@@ -30,7 +30,11 @@ public class AppClickListner implements View.OnClickListener {
                 if(TextUtils.isEmpty(appItem.getPakcgename())){
                     toSelecFuncton(view,CustomAppsActivity.FUNCTION_REPLACE);
                 }else {
-                    AppUtils.launchApp(appItem.getPakcgename());
+                    if(!appItem.isLegal()){
+                        toSelecFuncton(view,CustomAppsActivity.FUNCTION_REPLACE);
+                    }else {
+                        AppUtils.launchApp(appItem.getPakcgename());
+                    }
                 }
             }else {
                 //启动指定页面
@@ -39,7 +43,11 @@ public class AppClickListner implements View.OnClickListener {
                 } else if (AppsActivity.class.getName().equals(appItem.getPage())) {
                     toSelecFuncton(view,CustomAppsActivity.FUNCTION_SHOW);
                 } else {
-                    ActivityUtils.startActivity(appItem.getPakcgename(),appItem.getPage());
+                    if(!appItem.isLegal()){
+                        toSelecFuncton(view,CustomAppsActivity.FUNCTION_REPLACE);
+                    }else {
+                        ActivityUtils.startActivity(appItem.getPakcgename(),appItem.getPage());
+                    }
                 }
             }
         }else {

@@ -50,7 +50,6 @@ public class AppsSelectAdapter extends RecyclerView.Adapter<AppsSelectAdapter.It
     @Override
     public void onBindViewHolder(@NonNull AppsSelectAdapter.ItemViewHolder holder, int position) {
         AppItem item = appItems.get(position);
-        Log.e("dxsTest","item.isLegal():"+item.isLegal()+"  function:"+function);
         if (function == CustomAppsActivity.FUNCTION_SHOW) {
             if(item.isLegal()){
                 holder.mainView.UpdateUi(item);

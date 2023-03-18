@@ -105,12 +105,12 @@ public class TitleDefaultActivity extends BaseActicity{
         if(statusBarView!=null){
             mStorageManager= (StorageManager) getSystemService(Context.STORAGE_SERVICE);
             changeNet();
+            iswifi();
+            iswan();
             isSD();
             isUSB();
             isBluetooth();
         }
-
-
     }
 
     private void checkClean(){

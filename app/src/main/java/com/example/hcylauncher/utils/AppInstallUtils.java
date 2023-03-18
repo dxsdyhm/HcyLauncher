@@ -6,6 +6,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.util.Log;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.ThreadUtils;
+import com.example.hcylauncher.AppsActivity;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -60,5 +66,25 @@ public class AppInstallUtils {
         intent.addCategory(Intent.CATEGORY_LEANBACK_LAUNCHER);
         List<ResolveInfo> apps = packageManager.queryIntentActivities(intent, 0);
         return apps;
+    }
+
+    public static void UpdateApps(Context context){
+        if(instance==null){
+            getInstance(context.getApplicationContext());
+        }
+        ThreadUtils.executeBySingle(new ThreadUtils.SimpleTask<Object>() {
+            @Override
+            public Object doInBackground() throws Throwable {
+                //todo 注意异步问题
+                instance.apps=instance.getAllApps(context.getApplicationContext());
+                return null;
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                Intent intent=new Intent(AppsActivity.HCY_ACTION_UPDATEAPP);
+                LocalBroadcastManager.getInstance(context.getApplicationContext()).sendBroadcast(intent);
+            }
+        });
     }
 }

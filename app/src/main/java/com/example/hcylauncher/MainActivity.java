@@ -53,17 +53,7 @@ public class MainActivity extends TitleDefaultActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUi();
-        ThreadUtils.executeBySingle(new ThreadUtils.SimpleTask<Object>() {
-            @Override
-            public Object doInBackground() throws Throwable {
-                return AppInstallUtils.getInstance(MainActivity.this.getApplicationContext());
-            }
-
-            @Override
-            public void onSuccess(Object result) {
-
-            }
-        });
+        AppInstallUtils.UpdateApps(getApplicationContext());
     }
 
     @Override
@@ -102,14 +92,18 @@ public class MainActivity extends TitleDefaultActivity {
         item4.UpdateUi(new AppItem(apps.getApp4(),AppItem.TYPE_DEFAULT,4));
         item5.UpdateUi(new AppItem(apps.getApp5(),AppItem.TYPE_DEFAULT,5));
         item6.UpdateUi(new AppItem(apps.getApp6(),AppItem.TYPE_DEFAULT,6));
-
-
     }
 
     private void loadCustomerApps() {
         List<AppItem> items= new ArrayList<>();
         for(String pack:apps.getApps()){
-            items.add(new AppItem(pack));
+            AppItem item=new AppItem(pack);
+            Log.e("dxsTest","item."+item.isLegal());
+            if(!item.isLegal()){
+                apps.removeApp(pack);
+            }else {
+                items.add(item);
+            }
         }
         addFootBoot(items);
         adapter.UpdateData(items);

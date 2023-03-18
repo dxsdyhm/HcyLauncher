@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppsActivity extends TitleDefaultActivity {
+    public static String HCY_ACTION_UPDATEAPP="HCY_ACTION_UPDATEAPP";
     private RecyclerView appRecyView;
     private PackageChange change=new PackageChange();
     private AppsSelectAdapter adapter = new AppsSelectAdapter(CustomAppsActivity.FUNCTION_SHOW);
@@ -48,20 +50,28 @@ public class AppsActivity extends TitleDefaultActivity {
         int pix= ConvertUtils.dp2px(10);
         appRecyView.addItemDecoration(new SpaceItemDecoration(5,pix,true));
         appRecyView.setAdapter(adapter);
+        fackData();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         registBroadCast();
+        AppInstallUtils.UpdateApps(getApplicationContext());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(change!=null){
+            LocalBroadcastManager.getInstance(this).unregisterReceiver(change);
+        }
     }
 
     private void registBroadCast() {
         IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
-        filter.addAction(Intent.ACTION_PACKAGE_ADDED);
-        filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
-        registerReceiver(change,filter);
+        filter.addAction(HCY_ACTION_UPDATEAPP);
+        LocalBroadcastManager.getInstance(this).registerReceiver(change,filter);
     }
 
     private class PackageChange extends BroadcastReceiver {
@@ -69,7 +79,7 @@ public class AppsActivity extends TitleDefaultActivity {
         public void onReceive(Context context, Intent intent) {
             String action=intent.getAction();
             Log.e("dxsTest","action:"+action);
-
+            fackData();
         }
     }
 
