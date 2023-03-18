@@ -4,6 +4,10 @@
     <dimen name="defalt_margin">24dp</dimen>
     <dimen name="status_margin">4dp</dimen>
     <dimen name="defalt_cornes">12dp</dimen>
-    <dimen name="status_h">80dp</dimen>
+    <dimen name="status_h">90dp</dimen>
     <dimen name="status_icon_h">40dp</dimen>
+    <dimen name="main_1_w">230dp</dimen>
+    <dimen name="main_1_hight">380dp</dimen>
+    <dimen name="main_2_w">210dp</dimen>
+    <dimen name="main_2_h">170dp</dimen>
 </resources>

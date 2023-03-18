@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="10dp"
     android:id="@+id/test"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <include
         layout="@layout/title_bar"
@@ -16,25 +16,26 @@
 
     <include layout="@layout/main_view"
         android:layout_width="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="1.5"
         android:layout_height="wrap_content">
 
     </include>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:layout_weight="1"
+        android:layout_weight="2"
+        android:gravity="start"
+        android:paddingTop="20dp"
         android:layout_height="wrap_content">
 
         <com.example.hcylauncher.view.CustomerAppRecyView
             android:id="@+id/rl_apps"
             android:layout_width="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/defalt_margin"
-            android:layout_height="120dp"
-            android:layout_marginLeft="75dp"
-            android:paddingVertical="18dp">
+            android:layout_alignParentTop="true"
+            android:layout_height="110dp"
+            android:layout_marginLeft="125dp"
+            android:paddingVertical="10dp">
 
         </com.example.hcylauncher.view.CustomerAppRecyView>
 

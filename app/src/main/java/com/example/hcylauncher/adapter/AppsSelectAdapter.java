@@ -1,7 +1,5 @@
 package com.example.hcylauncher.adapter;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,14 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.AppUtils;
-import com.blankj.utilcode.util.IntentUtils;
 import com.example.hcylauncher.CustomAppsActivity;
-import com.example.hcylauncher.R;
 import com.example.hcylauncher.entry.AppItem;
 import com.example.hcylauncher.entry.DefaultLayApps;
 import com.example.hcylauncher.utils.AppLayoutUtils;
 import com.example.hcylauncher.view.ItemSelectView;
+import com.hcy.launcher.R;
 
 import java.util.ArrayList;
 import java.util.List;

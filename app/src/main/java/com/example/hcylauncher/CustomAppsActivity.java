@@ -2,7 +2,6 @@ package com.example.hcylauncher;
 
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -20,6 +19,7 @@ import com.example.hcylauncher.entry.AppItem;
 import com.example.hcylauncher.entry.DefaultLayApps;
 import com.example.hcylauncher.utils.AppInstallUtils;
 import com.example.hcylauncher.utils.AppLayoutUtils;
+import com.hcy.launcher.R;
 
 import java.util.ArrayList;
 import java.util.List;

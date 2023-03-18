@@ -1,9 +1,12 @@
 package com.example.hcylauncher.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 
-import com.example.hcylauncher.R;
+import com.hcy.launcher.R;
 import com.example.hcylauncher.adapter.AppClickListner;
 import com.example.hcylauncher.entry.AppItem;
 import com.example.hcylauncher.utils.AppLayoutUtils;
@@ -31,8 +34,14 @@ public class ItemMainView extends ScalRelativelayout {
 
     public ItemMainView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.HcyType);
+        int maintype=typedArray.getInteger(R.styleable.HcyType_maintype,1);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.item_main_view, this, true);
+        if(maintype==1){
+            inflater.inflate(R.layout.item_main_view, this, true);
+        }else {
+            inflater.inflate(R.layout.item_main_view_small, this, true);
+        }
         icon = findViewById(R.id.img_icon);
         txName = findViewById(R.id.tx_appname);
         setClickListner(null);

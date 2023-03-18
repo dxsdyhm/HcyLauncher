@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hcylauncher.R;
+import com.hcy.launcher.R;
 import com.example.hcylauncher.entry.AppItem;
 
 import java.util.ArrayList;

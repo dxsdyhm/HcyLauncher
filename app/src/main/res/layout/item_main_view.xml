@@ -9,7 +9,7 @@
         android:id="@+id/img_icon"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/tx_appname"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:src="@drawable/baseline_add_circle_outline_24"
         app:layout_constraintRight_toRightOf="parent"

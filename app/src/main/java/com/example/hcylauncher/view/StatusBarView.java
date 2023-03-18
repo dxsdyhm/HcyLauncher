@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
-import com.example.hcylauncher.R;
+import com.hcy.launcher.R;
 
 public class StatusBarView extends LinearLayout {
     public static int STATE_ON = 1;

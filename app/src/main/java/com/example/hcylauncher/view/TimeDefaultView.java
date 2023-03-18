@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.TimeUtils;
-import com.example.hcylauncher.R;
+import com.hcy.launcher.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

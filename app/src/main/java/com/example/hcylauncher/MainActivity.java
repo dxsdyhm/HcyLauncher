@@ -1,8 +1,6 @@
 package com.example.hcylauncher;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
@@ -10,30 +8,24 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.ImageView;
 
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.ImageUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PathUtils;
 import com.blankj.utilcode.util.PermissionUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ThreadUtils;
 import com.example.hcylauncher.adapter.CustomerItemAdapter;
 import com.example.hcylauncher.adapter.HorizontalSpaceItemDecoration;
-import com.example.hcylauncher.base.BaseActicity;
 import com.example.hcylauncher.base.TitleDefaultActivity;
-import com.example.hcylauncher.comm.SPkey;
 import com.example.hcylauncher.entry.AppItem;
 import com.example.hcylauncher.entry.DefaultLayApps;
+import com.example.hcylauncher.utils.AppInstallUtils;
 import com.example.hcylauncher.utils.AppLayoutUtils;
 import com.example.hcylauncher.view.CustomerAppRecyView;
 import com.example.hcylauncher.view.ItemMainView;
+import com.hcy.launcher.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +53,17 @@ public class MainActivity extends TitleDefaultActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUi();
+        ThreadUtils.executeBySingle(new ThreadUtils.SimpleTask<Object>() {
+            @Override
+            public Object doInBackground() throws Throwable {
+                return AppInstallUtils.getInstance(MainActivity.this.getApplicationContext());
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+
+            }
+        });
     }
 
     @Override

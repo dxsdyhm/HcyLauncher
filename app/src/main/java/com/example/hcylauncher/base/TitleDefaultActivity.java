@@ -8,6 +8,10 @@ import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.storage.DiskInfo;
+import android.os.storage.StorageManager;
+import android.os.storage.StorageVolume;
+import android.os.storage.VolumeInfo;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +22,9 @@ import com.example.hcylauncher.entry.DefaultLayApps;
 import com.example.hcylauncher.utils.AppLayoutUtils;
 import com.example.hcylauncher.view.StatusBarView;
 import com.example.hcylauncher.view.TimeDefaultView;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 处理布局状态栏上的状态更新
@@ -31,6 +38,7 @@ public class TitleDefaultActivity extends BaseActicity{
     public StatusBarView statusBarView;
     public TimeDefaultView timeDefaultView;
     public ImageView ivClean;
+    private StorageManager mStorageManager;
 
     @Override
     protected void onResume() {
@@ -95,11 +103,14 @@ public class TitleDefaultActivity extends BaseActicity{
 
     private void diaystuts() {
         if(statusBarView!=null){
+            mStorageManager= (StorageManager) getSystemService(Context.STORAGE_SERVICE);
             changeNet();
             isSD();
             isUSB();
             isBluetooth();
         }
+
+
     }
 
     private void checkClean(){
@@ -157,30 +168,30 @@ public class TitleDefaultActivity extends BaseActicity{
     }
 
     private boolean isSdcardExist() {
-//        List<VolumeInfo> volumes = mStorageManager.getVolumes();
-//        Collections.sort(volumes, VolumeInfo.getDescriptionComparator());
-//        for (VolumeInfo vol : volumes) {
-//            if (vol != null && vol.isMountedReadable() && vol.getType() == VolumeInfo.TYPE_PUBLIC) {
-//                DiskInfo disk = vol.getDisk();
-//                if (disk.isSd()) {
-//                    return true;
-//                }
-//            }
-//        }
+        List<VolumeInfo> volumes = mStorageManager.getVolumes();
+        Collections.sort(volumes, VolumeInfo.getDescriptionComparator());
+        for (VolumeInfo vol : volumes) {
+            if (vol != null && vol.isMountedReadable() && vol.getType() == VolumeInfo.TYPE_PUBLIC) {
+                DiskInfo disk = vol.getDisk();
+                if (disk.isSd()) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
     private boolean isUdiskExist() {
-//        List<VolumeInfo> volumes = mStorageManager.getVolumes();
-//        Collections.sort(volumes, VolumeInfo.getDescriptionComparator());
-//        for (VolumeInfo vol : volumes) {
-//            if (vol != null && vol.isMountedReadable() && vol.getType() == VolumeInfo.TYPE_PUBLIC) {
-//                DiskInfo disk = vol.getDisk();
-//                if (disk.isUsb()) {
-//                    return true;
-//                }
-//            }
-//        }
+        List<VolumeInfo> volumes = mStorageManager.getVolumes();
+        Collections.sort(volumes, VolumeInfo.getDescriptionComparator());
+        for (VolumeInfo vol : volumes) {
+            if (vol != null && vol.isMountedReadable() && vol.getType() == VolumeInfo.TYPE_PUBLIC) {
+                DiskInfo disk = vol.getDisk();
+                if (disk.isUsb()) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 

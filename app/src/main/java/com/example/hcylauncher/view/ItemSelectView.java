@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.example.hcylauncher.R;
+import com.hcy.launcher.R;
 import com.example.hcylauncher.entry.AppItem;
 
 public class ItemSelectView extends RelativeLayout {
