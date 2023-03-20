@@ -113,7 +113,6 @@ public class MainActivity extends TitleDefaultActivity {
         List<AppItem> items= new ArrayList<>();
         for(String pack:apps.getApps()){
             AppItem item=new AppItem(pack);
-            Log.e("dxsTest","item."+item.isLegal());
             if(!item.isLegal()){
                 apps.removeApp(pack);
             }else {

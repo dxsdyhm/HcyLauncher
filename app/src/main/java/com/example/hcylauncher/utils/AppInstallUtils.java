@@ -69,12 +69,12 @@ public class AppInstallUtils {
     }
 
     public static void UpdateApps(Context context){
-        if(instance==null){
-            getInstance(context.getApplicationContext());
-        }
         ThreadUtils.executeBySingle(new ThreadUtils.SimpleTask<Object>() {
             @Override
             public Object doInBackground() throws Throwable {
+                if(instance==null){
+                    getInstance(context.getApplicationContext());
+                }
                 //todo 注意异步问题
                 instance.apps=instance.getAllApps(context.getApplicationContext());
                 return null;

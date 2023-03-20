@@ -18,6 +18,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:name="com.example.hcylauncher.comm.HcyApplication"
         android:theme="@style/Theme.HcyLauncher"
         tools:targetApi="31">
         <activity
@@ -48,6 +49,7 @@
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
                 <action android:name="android.intent.action.PACKAGE_CHANGED" />
+                <action android:name="com.android.PreInstall" />
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>

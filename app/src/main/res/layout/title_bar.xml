@@ -17,7 +17,6 @@
         android:src="@drawable/clean"
         android:background="@drawable/bg_clean_selec"
         android:layout_width="40dp"
-        android:focusable="true"
         android:padding="6dp"
         android:layout_toLeftOf="@+id/time"
         android:layout_centerVertical="true"
