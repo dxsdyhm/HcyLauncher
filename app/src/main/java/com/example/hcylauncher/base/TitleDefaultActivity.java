@@ -39,14 +39,17 @@ public class TitleDefaultActivity extends BaseActicity{
     public TimeDefaultView timeDefaultView;
     public ImageView ivClean;
     private StorageManager mStorageManager;
+    public boolean ViewTest=true;
 
     @Override
     protected void onResume() {
         super.onResume();
         registBroadCast();
         updateDate();
-        diaystuts();
-        checkClean();
+        if(!ViewTest){
+            diaystuts();
+            checkClean();
+        }
     }
 
     @Override

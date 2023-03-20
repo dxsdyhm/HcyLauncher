@@ -25,6 +25,7 @@ import com.example.hcylauncher.utils.AppInstallUtils;
 import com.example.hcylauncher.utils.AppLayoutUtils;
 import com.example.hcylauncher.view.CustomerAppRecyView;
 import com.example.hcylauncher.view.ItemMainView;
+import com.example.hcylauncher.view.StatusBarView;
 import com.hcy.launcher.R;
 
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ public class MainActivity extends TitleDefaultActivity {
 
     private ItemMainView item1,item2,item3,item4,item5,item6;
     private DefaultLayApps apps;
-
 
 
     @Override
@@ -83,6 +83,21 @@ public class MainActivity extends TitleDefaultActivity {
         appRecyView.setLayoutManager(layoutManager);
         appRecyView.addItemDecoration(new HorizontalSpaceItemDecoration(10));
         appRecyView.setAdapter(adapter);
+
+        if(ViewTest){
+            for(int i=0;i<5;i++){
+                statusBarView.setIndexState(i, StatusBarView.STATE_ON);
+            }
+            ivClean.setVisibility(View.VISIBLE);
+            ThreadUtils.runOnUiThreadDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    View v=findViewById(R.id.test);
+                    v.setDrawingCacheEnabled(true);
+                    ImageUtils.save(v.getDrawingCache(), PathUtils.getInternalAppDataPath()+"/test.png", Bitmap.CompressFormat.PNG);
+                }
+            },7000);
+        }
     }
 
     private void loadMainApps(){
