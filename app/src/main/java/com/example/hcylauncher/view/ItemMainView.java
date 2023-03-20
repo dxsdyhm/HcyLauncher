@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 
+import com.example.hcylauncher.comm.PackagName;
 import com.hcy.launcher.R;
 import com.example.hcylauncher.adapter.AppClickListner;
 import com.example.hcylauncher.entry.AppItem;
@@ -39,11 +40,14 @@ public class ItemMainView extends ScalRelativelayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(maintype==1){
             inflater.inflate(R.layout.item_main_view, this, true);
-        }else {
+        } else if (maintype==3) {
+            inflater.inflate(R.layout.item_main_view_3, this, true);
+        } else {
             inflater.inflate(R.layout.item_main_view_small, this, true);
         }
         icon = findViewById(R.id.img_icon);
         txName = findViewById(R.id.tx_appname);
+        setElevation(3);
         setClickListner(null);
     }
 
@@ -79,7 +83,11 @@ public class ItemMainView extends ScalRelativelayout {
         }
         if(icon!=null){
             if(item.getAppInfo()!=null){
-                icon.setImageDrawable(item.getAppInfo().getIcon());
+                if(PackagName.PKG_YOUTUBE.equals(item.getAppInfo().getPackageName())){
+                    icon.setImageResource(R.drawable.youtube);
+                }else {
+                    icon.setImageDrawable(item.getAppInfo().getIcon());
+                }
             }else {
                 icon.setImageResource(R.drawable.baseline_add_circle_outline_24);
             }

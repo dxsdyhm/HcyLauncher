@@ -39,7 +39,7 @@ public class TitleDefaultActivity extends BaseActicity{
     public TimeDefaultView timeDefaultView;
     public ImageView ivClean;
     private StorageManager mStorageManager;
-    public boolean ViewTest=true;
+    public boolean ViewTest=false;
 
     @Override
     protected void onResume() {

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ConvertUtils;
+import com.blankj.utilcode.util.ScreenUtils;
 import com.example.hcylauncher.adapter.AppsSelectAdapter;
 import com.example.hcylauncher.adapter.SpaceItemDecoration;
 import com.example.hcylauncher.base.TitleDefaultActivity;
@@ -45,10 +46,11 @@ public class AppsActivity extends TitleDefaultActivity {
         timeDefaultView=findViewById(R.id.time);
         ivClean=findViewById(R.id.iv_clean);
         appRecyView = findViewById(R.id.rl_custom);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 5, LinearLayoutManager.VERTICAL, false);
+        int spanCount= ScreenUtils.isLandscape()?5:4;
+        GridLayoutManager layoutManager = new GridLayoutManager(this, spanCount, LinearLayoutManager.VERTICAL, false);
         appRecyView.setLayoutManager(layoutManager);
         int pix= ConvertUtils.dp2px(10);
-        appRecyView.addItemDecoration(new SpaceItemDecoration(5,pix,true));
+        appRecyView.addItemDecoration(new SpaceItemDecoration(spanCount,pix,true));
         appRecyView.setAdapter(adapter);
         fackData();
     }

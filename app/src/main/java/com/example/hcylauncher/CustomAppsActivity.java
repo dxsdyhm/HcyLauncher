@@ -59,7 +59,8 @@ public class CustomAppsActivity extends AppCompatActivity {
 
     private void initUi() {
         appRecyView = findViewById(R.id.rl_custom);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 5, LinearLayoutManager.VERTICAL, false);
+        int spanCount=ScreenUtils.isLandscape()?5:4;
+        GridLayoutManager layoutManager = new GridLayoutManager(this, spanCount, LinearLayoutManager.VERTICAL, false);
         appRecyView.setLayoutManager(layoutManager);
         int pix = ConvertUtils.dp2px(10);
         appRecyView.addItemDecoration(new SpaceItemDecoration(5, pix, true));
