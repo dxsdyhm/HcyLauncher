@@ -59,6 +59,9 @@ public class AppsSelectAdapter extends RecyclerView.Adapter<AppsSelectAdapter.It
             holder.check.setVisibility(View.GONE);
             holder.mainView.setOnClickListener(new AppClickListner(item));
             holder.mainView.setOnLongClickListener(new AppDeleteLongClick(item));
+            if(holder.getAdapterPosition()==0){
+                holder.mainView.requestFocus();
+            }
         }else if(function == CustomAppsActivity.FUNCTION_REPLACE&&apps!=null){
             holder.mainView.UpdateUi(item);
             holder.check.setVisibility(View.GONE);

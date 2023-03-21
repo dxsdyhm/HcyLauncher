@@ -1,5 +1,6 @@
 package com.example.hcylauncher.entry;
 
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -7,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.example.hcylauncher.comm.Constans;
 
 public class AppItem {
     public static int TYPE_DEFAULT = 0;
@@ -89,7 +91,8 @@ public class AppItem {
         if (TextUtils.isEmpty(pakcgename)) {
             return false;
         }
-        if (!AppUtils.isAppInstalled(pakcgename)) {
+        int state=SystemProperties.getInt(Constans.PERSI,0);
+        if (state==1&&!AppUtils.isAppInstalled(pakcgename)) {
             return false;
         }
         if (this.appInfo == null) {

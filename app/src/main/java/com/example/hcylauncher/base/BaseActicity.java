@@ -14,11 +14,8 @@ import androidx.core.app.ActivityCompat;
 
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.PermissionUtils;
+import com.example.hcylauncher.utils.UpdateCustomer;
 
-public class BaseActicity extends AppCompatActivity {
+public class BaseActicity extends AppCompatActivity{
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 }

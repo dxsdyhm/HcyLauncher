@@ -5,6 +5,7 @@ import android.app.Application;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.FileUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 public class HcyApplication extends Application {
     @Override

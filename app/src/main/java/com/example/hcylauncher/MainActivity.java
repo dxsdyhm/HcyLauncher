@@ -7,12 +7,14 @@ import android.app.WallpaperManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.ImageUtils;
+import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.PathUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ThreadUtils;
@@ -98,6 +100,7 @@ public class MainActivity extends TitleDefaultActivity {
                 }
             },7000);
         }
+        item1.requestFocus();
     }
 
     private void loadMainApps(){
@@ -144,5 +147,23 @@ public class MainActivity extends TitleDefaultActivity {
                         Log.e("dxsTest", "STORAGE onDenied");
                     }
                 }).request();
+    }
+
+    @Override
+    public boolean updateCustomerAdd(String pkg) {
+        loadMainApps();
+        loadCustomerApps();
+        return true;
+    }
+
+    @Override
+    public boolean updateCustomerRemovie(String pkg) {
+        if(TextUtils.isEmpty(pkg)||apps==null){
+            return false;
+        }
+        apps.removeApp(pkg);
+        loadMainApps();
+        loadCustomerApps();
+        return true;
     }
 }

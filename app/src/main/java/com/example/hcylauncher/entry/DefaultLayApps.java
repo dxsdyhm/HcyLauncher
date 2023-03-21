@@ -106,6 +106,27 @@ public class DefaultLayApps {
 
     public void removeApp(String pks){
         try {
+            if(TextUtils.isEmpty(pks)){
+                if(pks.equals(app1)){
+                    app1="";
+                }
+                if(pks.equals(app2)){
+                    app2="";
+                }
+                if(pks.equals(app3)){
+                    app3="";
+                }
+                if(pks.equals(app4)){
+                    app4="";
+                }
+                if(pks.equals(app5)){
+                    app5="";
+                }
+                if(pks.equals(app6)){
+                    app6="";
+                }
+            }
+
             Set<String> allpack=new HashSet<>();
             for (String s:this.apps){
                 allpack.add(s);

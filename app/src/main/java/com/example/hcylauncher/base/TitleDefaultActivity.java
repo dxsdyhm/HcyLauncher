@@ -8,6 +8,8 @@ import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
@@ -16,10 +18,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.example.hcylauncher.entry.DefaultLayApps;
+import com.example.hcylauncher.utils.AppInstallUtils;
 import com.example.hcylauncher.utils.AppLayoutUtils;
+import com.example.hcylauncher.utils.UpdateCustomer;
 import com.example.hcylauncher.view.StatusBarView;
 import com.example.hcylauncher.view.TimeDefaultView;
 
@@ -31,7 +38,7 @@ import java.util.List;
  * 1.外设接口状态变更
  * 2.时间更新
  */
-public class TitleDefaultActivity extends BaseActicity{
+public class TitleDefaultActivity extends BaseActicity implements UpdateCustomer {
     private static String TAG="TitleDefaultActivity";
 
     private TitleBroadReceviver receviver=new TitleBroadReceviver();
@@ -40,22 +47,51 @@ public class TitleDefaultActivity extends BaseActicity{
     public ImageView ivClean;
     private StorageManager mStorageManager;
     public boolean ViewTest=false;
+    NetworkUtils.OnNetworkStatusChangedListener listener=new NetworkUtils.OnNetworkStatusChangedListener() {
+        @Override
+        public void onDisconnected() {
+            diaystuts();
+        }
+
+        @Override
+        public void onConnected(NetworkUtils.NetworkType networkType) {
+            diaystuts();
+        }
+    };
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        registBroadCast();
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        registBroadCast();
         updateDate();
         if(!ViewTest){
             diaystuts();
             checkClean();
+        }
+        if(!NetworkUtils.isRegisteredNetworkStatusChangedListener(listener)){
+            NetworkUtils.registerNetworkStatusChangedListener(listener);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(receviver);
+        if(NetworkUtils.isRegisteredNetworkStatusChangedListener(listener)){
+            NetworkUtils.unregisterNetworkStatusChangedListener(listener);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(receviver!=null){
+            unregisterReceiver(receviver);
+        }
+        super.onDestroy();
     }
 
     private void registBroadCast() {
@@ -72,7 +108,11 @@ public class TitleDefaultActivity extends BaseActicity{
 
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
+        filter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
         filter.addDataScheme("file");
+        filter.addDataScheme("package");
         registerReceiver(receviver,filter);
     }
 
@@ -87,7 +127,20 @@ public class TitleDefaultActivity extends BaseActicity{
                 statusBarView.setIndexState(StatusBarView.INDEX_USB,StatusBarView.STATE_ON);
             }else if(UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)){
                 statusBarView.setIndexState(StatusBarView.INDEX_USB,StatusBarView.STATE_OFF);
-            }else {
+            } else if (Intent.ACTION_PACKAGE_ADDED.equals(action) || Intent.ACTION_PACKAGE_REMOVED.equals(action)
+                    || Intent.ACTION_PACKAGE_CHANGED.equals(action)) {
+                AppInstallUtils.UpdateApps(context);
+                if(Intent.ACTION_PACKAGE_REMOVED.equals(action)){
+                    //检查快捷栏app是否被删除
+                    Uri data = intent.getData();
+                    String removePakc = data.getSchemeSpecificPart();
+                    updateCustomerRemovie(removePakc);
+                } else if (Intent.ACTION_PACKAGE_ADDED.equals(action)) {
+                    Uri data = intent.getData();
+                    String removePakc = data.getSchemeSpecificPart();
+                    updateCustomer(removePakc);
+                }
+            } else {
                 diaystuts();
             }
         }

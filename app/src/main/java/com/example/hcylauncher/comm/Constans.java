@@ -9,4 +9,5 @@ public class Constans {
     public static String BUND_REPLACE_INDEX = "BUND_REPLACE_INDEX";
     public static String PATH_SETUP_FLAG="/data/data/com.mbx.settingsmbox/SUCCESS_FLAG";
     public static String PACKAGE_SETUP="com.mbx.settingsmbox";
+    public static String PERSI="persist.sys.installfinish";
 }
