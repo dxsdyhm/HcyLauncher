@@ -36,7 +36,6 @@ public class AppLayoutUtils {
         if(TextUtils.isEmpty(apps)){
             //没有添加过任何配置,读取并使用系统配置
             apps= FileIOUtils.readFile2String(Constans.PATH_CONFIG);
-            Log.e("dxsTest","apps:"+apps);
         }
         DefaultLayApps defaultLayApps;
         try {
@@ -44,7 +43,6 @@ public class AppLayoutUtils {
                 throw new Exception();
             }
             defaultLayApps=GsonUtils.fromJson(apps,DefaultLayApps.class);
-            Log.e("dxsTest","defaultLayApps:"+Arrays.toString(defaultLayApps.getApps()));
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(TAG,"default config is errot :"+apps);

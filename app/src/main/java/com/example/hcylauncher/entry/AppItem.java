@@ -95,7 +95,7 @@ public class AppItem {
         if (state==1&&!AppUtils.isAppInstalled(pakcgename)) {
             return false;
         }
-        if (this.appInfo == null) {
+        if (state==1&&this.appInfo == null) {
             return false;
         }
         return true;
