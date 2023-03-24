@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.hcy.launcher'
+    namespace 'com.hcy.hcylauncher'
     compileSdk 33
 
     defaultConfig {

@@ -9,45 +9,51 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.USB_PERMISSION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
+        android:name=".comm.HcyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name="com.example.hcylauncher.comm.HcyApplication"
         android:theme="@style/Theme.HcyLauncher"
         tools:targetApi="31">
         <activity
-            android:name="com.example.hcylauncher.MainActivity"
+            android:name=".InatallActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.MONKEY" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.hcylauncher.CustomAppsActivity"
+            android:name=".CustomAppsActivity"
             android:exported="true"
-            android:theme="@style/ActivityDialogTheme">
-
-        </activity>
+            android:theme="@style/ActivityDialogTheme" />
         <activity
-            android:name="com.example.hcylauncher.AppsActivity"
-            android:exported="true">
+            android:name=".AppsActivity"
+            android:exported="true" />
 
-        </activity>
-        
-        <receiver android:name="com.example.hcylauncher.base.ChangeAppsReciver"
+        <receiver
+            android:name=".base.ChangeAppsReciver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -55,6 +61,7 @@
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
                 <action android:name="android.intent.action.PACKAGE_CHANGED" />
                 <action android:name="com.android.PreInstall" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>

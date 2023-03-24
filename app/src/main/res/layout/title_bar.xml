@@ -4,13 +4,13 @@
     android:paddingHorizontal="70dp"
     android:layout_height="match_parent">
 
-    <com.example.hcylauncher.view.StatusBarView
+    <com.hcy.hcylauncher.view.StatusBarView
         android:id="@+id/ststus"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true">
 
-    </com.example.hcylauncher.view.StatusBarView>
+    </com.hcy.hcylauncher.view.StatusBarView>
 
     <ImageView
         android:id="@+id/iv_clean"
@@ -24,13 +24,13 @@
 
     </ImageView>
 
-    <com.example.hcylauncher.view.TimeDefaultView
+    <com.hcy.hcylauncher.view.TimeDefaultView
         android:id="@+id/time"
         android:layout_width="300dp"
         android:layout_marginRight="-30dp"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true">
 
-    </com.example.hcylauncher.view.TimeDefaultView>
+    </com.hcy.hcylauncher.view.TimeDefaultView>
 
 </RelativeLayout>

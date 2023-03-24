@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.hcylauncher.view.ItemMainView
+    <com.hcy.hcylauncher.view.ItemMainView
         android:id="@+id/item1"
         android:layout_width="@dimen/main_1_w"
         android:layout_height="@dimen/main_1_hight"
@@ -17,9 +17,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/item2">
 
-    </com.example.hcylauncher.view.ItemMainView>
+    </com.hcy.hcylauncher.view.ItemMainView>
 
-    <com.example.hcylauncher.view.ItemMainView
+    <com.hcy.hcylauncher.view.ItemMainView
         android:id="@+id/item2"
         android:layout_width="@dimen/main_1_w"
         android:layout_height="@dimen/main_1_hight"
@@ -31,9 +31,9 @@
         app:layout_constraintTop_toTopOf="@id/item1"
         app:layout_constraintRight_toLeftOf="@id/item3">
 
-    </com.example.hcylauncher.view.ItemMainView>
+    </com.hcy.hcylauncher.view.ItemMainView>
 
-    <com.example.hcylauncher.view.ItemMainView
+    <com.hcy.hcylauncher.view.ItemMainView
         android:id="@+id/item3"
         android:layout_width="@dimen/main_2_w"
         android:layout_height="@dimen/main_2_h"
@@ -45,8 +45,8 @@
         app:layout_constraintRight_toLeftOf="@id/item5"
         app:layout_constraintBottom_toTopOf="@id/item4">
 
-    </com.example.hcylauncher.view.ItemMainView>
-    <com.example.hcylauncher.view.ItemMainView
+    </com.hcy.hcylauncher.view.ItemMainView>
+    <com.hcy.hcylauncher.view.ItemMainView
         android:id="@+id/item4"
         android:layout_width="@dimen/main_2_w"
         android:layout_height="@dimen/main_2_h"
@@ -57,8 +57,8 @@
         app:layout_constraintRight_toRightOf="@id/item3"
         app:layout_constraintLeft_toLeftOf="@id/item3">
 
-    </com.example.hcylauncher.view.ItemMainView>
-    <com.example.hcylauncher.view.ItemMainView
+    </com.hcy.hcylauncher.view.ItemMainView>
+    <com.hcy.hcylauncher.view.ItemMainView
         android:id="@+id/item5"
         android:layout_width="@dimen/main_2_w"
         android:layout_height="@dimen/main_2_h"
@@ -70,8 +70,8 @@
         app:layout_constraintBottom_toTopOf="@id/item6"
         app:layout_constraintRight_toRightOf="parent">
 
-    </com.example.hcylauncher.view.ItemMainView>
-    <com.example.hcylauncher.view.ItemMainView
+    </com.hcy.hcylauncher.view.ItemMainView>
+    <com.hcy.hcylauncher.view.ItemMainView
         android:id="@+id/item6"
         android:layout_width="@dimen/main_2_w"
         android:layout_height="@dimen/main_2_h"
@@ -82,6 +82,6 @@
         app:layout_constraintRight_toRightOf="@id/item5"
         app:layout_constraintBottom_toBottomOf="@id/item4">
 
-    </com.example.hcylauncher.view.ItemMainView>
+    </com.hcy.hcylauncher.view.ItemMainView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

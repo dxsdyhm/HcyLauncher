@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.hcylauncher.view.ItemAppsView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.hcy.hcylauncher.view.ItemAppsView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:background="@drawable/bg_main_view"
     android:padding="@dimen/defalt_padings"
@@ -14,4 +14,4 @@
         android:layout_height="match_parent">
     </ImageView>
 
-</com.example.hcylauncher.view.ItemAppsView>
+</com.hcy.hcylauncher.view.ItemAppsView>

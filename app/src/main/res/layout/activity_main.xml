@@ -28,7 +28,7 @@
         android:paddingTop="20dp"
         android:layout_height="wrap_content">
 
-        <com.example.hcylauncher.view.CustomerAppRecyView
+        <com.hcy.hcylauncher.view.CustomerAppRecyView
             android:id="@+id/rl_apps"
             android:layout_width="wrap_content"
             android:layout_alignParentStart="true"
@@ -37,7 +37,7 @@
             android:layout_marginLeft="140dp"
             android:paddingVertical="10dp">
 
-        </com.example.hcylauncher.view.CustomerAppRecyView>
+        </com.hcy.hcylauncher.view.CustomerAppRecyView>
 
     </RelativeLayout>
 </LinearLayout>
