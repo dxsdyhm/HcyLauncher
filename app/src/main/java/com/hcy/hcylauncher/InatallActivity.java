@@ -1,17 +1,27 @@
 package com.hcy.hcylauncher;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.ContentLoadingProgressBar;
 
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.util.Log;
+import android.view.KeyEvent;
 
+import com.blankj.utilcode.constant.TimeConstants;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.ThreadUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.hcy.hcylauncher.comm.Constans;
 import  com.hcy.hcylauncher.R;
 
 import java.util.concurrent.TimeUnit;
 
 public class InatallActivity extends AppCompatActivity {
+    static int INSTALL_TIMEOUT=3*60;
+    private long startTime=0;
 
     private ThreadUtils.SimpleTask checkTask = new ThreadUtils.SimpleTask<Boolean>() {
         @Override
@@ -23,17 +33,29 @@ public class InatallActivity extends AppCompatActivity {
 
         @Override
         public void onSuccess(Boolean result) {
+            long span= Math.abs(TimeUtils.getTimeSpanByNow(startTime, TimeConstants.SEC));
+            if(span>=INSTALL_TIMEOUT){
+                //超时强制进入系统
+                SystemProperties.set(Constans.PERSI,"1");
+                result=false;
+            }
+            Log.e("dxsTest","result:"+result+"span:"+span);
             if (result) {
                 //还在安装
             } else {
                 //安装完成，跳转到主页
                 if (checkTask != null) {
                     ThreadUtils.cancel(checkTask);
-
                 }
+                toMain();
             }
         }
     };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +63,22 @@ public class InatallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inatall);
         int state = SystemProperties.getInt(Constans.PERSI, 0);
         if (state == 0) {
+            startTime= TimeUtils.getNowMills();
+            ContentLoadingProgressBar bar=findViewById(R.id.progress);
+            bar.setActivated(true);
+            bar.show();
             //只会在预装未完成时运行
             ThreadUtils.executeBySingleAtFixRate(checkTask, 1000, TimeUnit.MILLISECONDS);
+        }else {
+            toMain();
         }
+    }
+    
+    private void toMain(){
+        boolean comple = FileUtils.isFileExists(Constans.PATH_SETUP_FLAG);
+        if (!comple) {
+            AppUtils.launchApp(Constans.PACKAGE_SETUP);
+        }
+        ActivityUtils.finishActivity(this);
     }
 }

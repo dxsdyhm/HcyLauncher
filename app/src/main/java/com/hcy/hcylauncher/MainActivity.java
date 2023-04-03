@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.constant.PermissionConstants;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.ImageUtils;
