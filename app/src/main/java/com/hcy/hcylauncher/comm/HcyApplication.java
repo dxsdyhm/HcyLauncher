@@ -3,6 +3,7 @@ package com.hcy.hcylauncher.comm;
 import android.app.Application;
 import android.content.Context;
 import android.os.SystemProperties;
+import android.util.Log;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;

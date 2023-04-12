@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:sharedUserId="android.uid.system"
-    android:sharedUserMaxSdkVersion="32">
+    android:sharedUserId="android.uid.system">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,8 +22,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HcyLauncher"
-        tools:targetApi="31">
+        android:theme="@style/Theme.HcyLauncher">
         <activity
             android:name=".InatallActivity"
             android:exported="false"
@@ -44,7 +42,6 @@
 
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.MONKEY" />
             </intent-filter>
         </activity>
         <activity

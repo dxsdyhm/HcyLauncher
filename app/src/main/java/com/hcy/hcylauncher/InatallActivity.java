@@ -20,7 +20,7 @@ import  com.hcy.hcylauncher.R;
 import java.util.concurrent.TimeUnit;
 
 public class InatallActivity extends AppCompatActivity {
-    static int INSTALL_TIMEOUT=3*60;
+    static int INSTALL_TIMEOUT=6*60;
     private long startTime=0;
 
     private ThreadUtils.SimpleTask checkTask = new ThreadUtils.SimpleTask<Boolean>() {
@@ -34,7 +34,8 @@ public class InatallActivity extends AppCompatActivity {
         @Override
         public void onSuccess(Boolean result) {
             long span= Math.abs(TimeUtils.getTimeSpanByNow(startTime, TimeConstants.SEC));
-            if(span>=INSTALL_TIMEOUT){
+            int timeout=SystemProperties.getInt(Constans.PREINSTALL_TIME,INSTALL_TIMEOUT);
+            if(span>=timeout){
                 //超时强制进入系统
                 SystemProperties.set(Constans.PERSI,"1");
                 result=false;
@@ -64,21 +65,31 @@ public class InatallActivity extends AppCompatActivity {
         int state = SystemProperties.getInt(Constans.PERSI, 0);
         if (state == 0) {
             startTime= TimeUtils.getNowMills();
-            ContentLoadingProgressBar bar=findViewById(R.id.progress);
-            bar.setActivated(true);
-            bar.show();
+            showProgress();
             //只会在预装未完成时运行
             ThreadUtils.executeBySingleAtFixRate(checkTask, 1000, TimeUnit.MILLISECONDS);
         }else {
             toMain();
         }
     }
-    
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showProgress();
+    }
+
     private void toMain(){
         boolean comple = FileUtils.isFileExists(Constans.PATH_SETUP_FLAG);
         if (!comple) {
             AppUtils.launchApp(Constans.PACKAGE_SETUP);
         }
         ActivityUtils.finishActivity(this);
+    }
+
+    private void showProgress(){
+        ContentLoadingProgressBar bar=findViewById(R.id.progress);
+        bar.setActivated(true);
+        bar.show();
     }
 }

@@ -10,4 +10,5 @@ public class Constans {
     public static String PATH_SETUP_FLAG="/data/data/com.mbx.settingsmbox/SUCCESS_FLAG";
     public static String PACKAGE_SETUP="com.mbx.settingsmbox";
     public static String PERSI="persist.sys.installfinish";
+    public static String PREINSTALL_TIME="persist.sys.installtime";
 }

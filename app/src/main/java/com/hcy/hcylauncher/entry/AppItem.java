@@ -70,7 +70,9 @@ public class AppItem {
                 }
             } else {
                 this.pakcgename = pakcgename;
-                this.appInfo = AppUtils.getAppInfo(this.pakcgename);
+                if(AppUtils.isAppInstalled(this.pakcgename)){
+                    this.appInfo = AppUtils.getAppInfo(this.pakcgename);
+                }
             }
         }
     }
