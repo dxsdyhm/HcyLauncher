@@ -13,6 +13,7 @@ import com.hcy.hcylauncher.AppsActivity;
 import com.hcy.hcylauncher.CustomAppsActivity;
 import com.hcy.hcylauncher.comm.Constans;
 import com.hcy.hcylauncher.entry.AppItem;
+import com.hcy.hcylauncher.utils.LunchUtils;
 
 public class AppClickListner implements View.OnClickListener {
     private static String TAG = "AppClickListner";
@@ -33,7 +34,7 @@ public class AppClickListner implements View.OnClickListener {
                     if(!appItem.isLegal()){
                         toSelecFuncton(view,CustomAppsActivity.FUNCTION_REPLACE);
                     }else {
-                        AppUtils.launchApp(appItem.getPakcgename());
+                        LunchUtils.launchApp(appItem.getPakcgename());
                     }
                 }
             }else {
