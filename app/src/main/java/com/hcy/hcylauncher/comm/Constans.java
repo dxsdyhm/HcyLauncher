@@ -11,4 +11,5 @@ public class Constans {
     public static String PACKAGE_SETUP="com.mbx.settingsmbox";
     public static String PERSI="persist.sys.installfinish";
     public static String PREINSTALL_TIME="persist.sys.installtime";
+    public static String PRE_COLOR="persist.sys.bgcolor";
 }

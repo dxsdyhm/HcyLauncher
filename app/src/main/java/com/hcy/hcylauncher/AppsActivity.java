@@ -9,6 +9,7 @@ import android.content.pm.ResolveInfo;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.util.Log;
 import android.view.KeyEvent;
 
@@ -17,11 +18,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ColorUtils;
 import com.blankj.utilcode.util.ConvertUtils;
+import com.blankj.utilcode.util.ResourceUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.hcy.hcylauncher.adapter.AppsSelectAdapter;
 import com.hcy.hcylauncher.adapter.SpaceItemDecoration;
 import com.hcy.hcylauncher.base.TitleDefaultActivity;
+import com.hcy.hcylauncher.comm.Constans;
 import com.hcy.hcylauncher.entry.AppItem;
 import com.hcy.hcylauncher.utils.AppInstallUtils;
 import com.hcy.hcylauncher.view.StatusBarView;
@@ -39,7 +43,16 @@ public class AppsActivity extends TitleDefaultActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apps);
+        setBackColor();
         initUi();
+    }
+    private void setBackColor() {
+        try {
+            String color= SystemProperties.get(Constans.PRE_COLOR, "");
+            findViewById(R.id.ll_bg).setBackgroundColor(ColorUtils.string2Int(color));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initUi() {
