@@ -43,7 +43,7 @@ public class AppsActivity extends TitleDefaultActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apps);
-        setBackColor();
+        //setBackColor();
         initUi();
     }
     private void setBackColor() {
